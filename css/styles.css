@@ -1,25 +1,55 @@
 body {
   background-image: url(/img/pexels-pixabay-531880.jpg);
+  background-size: cover;
 }
 
 .login {
   width: 50%;
-  height: 25rem;
+  height: auto;
   background-color: #fff;
   border-radius: 0.8rem;
-  padding: 0.5rem;
-}
-
-.button {
-  display: block;
-  width: 30%;
-  padding: 0.5rem !important;
+  padding: 5rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem rgba(255, 255, 255, 05);
 }
 
 .info {
-  width: 80%;
+  width: 90%;
   height: auto;
   background-color: #fff;
   border-radius: 0.8rem;
   padding: 0.5rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem rgba(255, 255, 255, 05);
+}
+
+.box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.box span {
+  border-right: 1px solid #000;
+  position: absolute;
+  left: 3%;
+  font-weight: 500;
+  padding: 0.25rem;
+  margin: 0 auto;
+}
+
+.box input {
+  margin: 0rem 0.5rem;
+  padding: 0.25rem 3rem;
+}
+
+.table {
+  max-width: none;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+@media (max-width: 992px) {
+  .info,
+  .login {
+    width: 90%;
+  }
 }

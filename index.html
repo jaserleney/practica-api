@@ -16,24 +16,83 @@
 <body>
   <div id="app">
 
-    <div class="container login my-5 mx-auto">
+    <div v-if="is.out" class="container-fluid login my-5 mx-auto">
       <div class="d-flex d-flex justify-content-center my-4">
         <h2>
-          <span class="material-symbols-outlined">login</span> Bienvenido Al Sistema!
+          <span class="material-symbols-outlined">login</span> Bienvenido Al <span class="text-primary">Sistema!</span>
         </h2>
       </div>
-      <form class="d-flex flex-column align-items-center" @click-="login">
-        <div class="user container d-flex justify-content-center my-4">
+      <form class="form d-flex flex-column align-items-center" @submit.prevent="login">
+        <div class="box user container d-flex justify-content-center my-4">
           <span class="material-symbols-outlined">account_circle</span>
-          <input type="text" placeholder="Escribe Tu User">
+          <input v-model="username" class="form-control border-0 border-bottom border-primary" type="text"
+            placeholder="Username">
         </div>
-        <div class="password container d-flex justify-content-center my-4">
+        <div class="box password container d-flex justify-content-center my-4">
           <span class="material-symbols-outlined">visibility_off </span>
-          <input type="password" placeholder="Escribe Tu Password" />
+          <input v-model="password" class="form-control border-0 border-bottom border-primary" type="password"
+            placeholder="Password" />
         </div>
-        <button type="submit" class="btn btn-primary button"><a href="./login.html"></a>Login</button>
+        <button type="submit" class="btn btn-primary button py-2 px-4"><a href="./login.html"></a>Login</button>
       </form>
     </div>
+
+    <template v-if="is.login">
+      <div class="container-fluid info my-4">
+        <div class="col-md-12 text-center my-5">
+          <h1 v-text="message"></h1>
+        </div>
+        <hr />
+
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-4 d-flex flex-column flex-md-row justify-content-center align-items-center">
+            <label class="text-center mx-2" for="gender">Seleccione Genero</label>
+            <select v-model="gender" class="form-select" id="gender">
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </div>
+          <div class="col-md-4 d-flex flex-column flex-md-row justify-content-center align-items-center">
+            <label class="text-center mx-2" for="amount">Cantidad</label>
+            <input v-model="amount" class="form-control" type="number" id="amount" />
+          </div>
+
+        </div>
+
+        <div class="container-fluid col-sm-12 col-md-10 my-5 fs-6 fs-md-2">
+          <table class=" table table-hover">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">Photo</th>
+                <th class="text-center" scope="col">Name</th>
+                <th class="text-center" scope="col">Gender</th>
+                <th class="text-center" scope="col">Country</th>
+                <th class="text-center" scope="col">Email</th>
+                <th class="text-center" scope="col">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="el in dataFilter">
+                <td class="mx-auto align-middle text-center">
+                  <img class="img-fluid rounded-circle" :src="el.picture.thumbnail" :alt="el.name.first" />
+                </td>
+                <td class="text-center align-middle" v-text="`${el.name.first}`"></td>
+                <td class="text-center align-middle" v-text="el.gender"></td>
+                <td class="text-center align-middle" v-text="el.location.country"></td>
+                <td class=" text-center align-middle" v-text="el.email">
+                </td>
+                <td class="text-center align-middle" v-text="el.phone"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr />
+        <button type="button" class="btn btn-danger d-flex justify-content-center mx-auto my-4">
+          <span class="material-symbols-outlined">logout</span>Salir
+        </button>
+      </div>
+    </template>
 
 
 

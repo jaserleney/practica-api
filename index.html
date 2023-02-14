@@ -47,14 +47,14 @@
         <div class="row d-flex justify-content-center">
           <div class="col-md-4 d-flex flex-column flex-md-row justify-content-center align-items-center">
             <label class="text-center mx-2" for="gender">Seleccione Genero</label>
-            <select v-model="gender" class="form-select" id="gender">
+            <select @change="filteredData" v-model="gender" class="form-select" id="gender">
               <option value="female">Female</option>
               <option value="male">Male</option>
             </select>
           </div>
           <div class="col-md-4 d-flex flex-column flex-md-row justify-content-center align-items-center">
             <label class="text-center mx-2" for="amount">Cantidad</label>
-            <input v-model="amount" class="form-control" type="number" id="amount" />
+            <input @keyup="filteredData" v-model="amount" class="form-control" type="number" id="amount" />
           </div>
 
         </div>
@@ -63,25 +63,29 @@
           <table class=" table table-hover">
             <thead>
               <tr>
-                <th class="text-center" scope="col">Photo</th>
-                <th class="text-center" scope="col">Name</th>
-                <th class="text-center" scope="col">Gender</th>
-                <th class="text-center" scope="col">Country</th>
+                <th class="text-center" scope="col">Foto</th>
+                <th class="text-center" scope="col">Nombre</th>
+                <th class="text-center" scope="col">Genero</th>
+                <th class="text-center" scope="col">Pais</th>
                 <th class="text-center" scope="col">Email</th>
-                <th class="text-center" scope="col">Phone</th>
+                <th class="text-center" scope="col">Tel</th>
+                <th class="text-center" scope="col">Eliminar</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="el in dataFilter">
+              <tr v-for="(el,index) in dataFilter" :key="index">
                 <td class="mx-auto align-middle text-center">
                   <img class="img-fluid rounded-circle" :src="el.picture.thumbnail" :alt="el.name.first" />
                 </td>
-                <td class="text-center align-middle" v-text="`${el.name.first}`"></td>
+                <td class="text-center align-middle" v-text="el.name.first +' '+ el.name.last"></td>
                 <td class="text-center align-middle" v-text="el.gender"></td>
                 <td class="text-center align-middle" v-text="el.location.country"></td>
                 <td class=" text-center align-middle" v-text="el.email">
                 </td>
                 <td class="text-center align-middle" v-text="el.phone"></td>
+                <td class="text-center align-middle">
+                  <button type="button" class="btn-close" aria-label="Close"></button>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -4,6 +4,7 @@ var app = new Vue({
     message: "Bienvenido",
     data: [],
     dataFilter: [],
+    dataFilterComputed: [],
 
     is: {
       out: true,
@@ -13,6 +14,21 @@ var app = new Vue({
     password: "",
     gender: "",
     amount: "",
+    active: {},
+  },
+
+  computed: {
+    filteredData() {
+      if (this.gender) {
+        this.dataFilterComputed = this.data.filter(
+          (el) => el.login.username !== this.active.username
+        );
+
+        this.dataFilter = this.dataFilterComputed.filter(
+          (el) => el.gender === this.gender
+        );
+      }
+    },
   },
 
   methods: {
@@ -22,8 +38,9 @@ var app = new Vue({
       });
 
       if (
-        login.find((el) => el.username === this.username) ||
-        login.find((el) => el.password === this.password)
+        login.find(
+          (el) => el.username === this.username && el.password === this.password
+        )
       ) {
         // console.log(login);
         this.is = {
@@ -35,6 +52,8 @@ var app = new Vue({
           username: this.username,
           password: this.password,
         };
+
+        localStorage;
 
         if (this.active) {
           this.dataFilter = this.data.filter(

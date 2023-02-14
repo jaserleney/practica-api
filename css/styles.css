@@ -1,6 +1,9 @@
 body {
   background-image: url(/img/pexels-pixabay-531880.jpg);
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .login {
@@ -28,6 +31,7 @@ body {
 }
 
 .box span {
+  text-align: center;
   border-right: 1px solid #000;
   position: absolute;
   left: 3%;
@@ -47,9 +51,34 @@ body {
   word-wrap: break-word;
 }
 
+.fade-in-down {
+  animation: fade-in-down 1.3s ease-in-out 1;
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 992px) {
   .info,
   .login {
     width: 90%;
+  }
+}
+
+@media (max-width: 753px) {
+  .box span {
+    display: none;
+  }
+  .box input {
+    text-align: center;
+    font-size: 0.8rem;
   }
 }

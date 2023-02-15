@@ -19,8 +19,9 @@ var app = new Vue({
 
   computed: {
     filteredData() {
+      this.dataFilterComputed = [...this.data];
       if (this.gender) {
-        this.dataFilterComputed = this.data.filter(
+        this.dataFilterComputed = this.dataFilterComputed.filter(
           (el) => el.login.username !== this.active.username
         );
 
@@ -110,6 +111,10 @@ var app = new Vue({
         let data = await res.json();
 
         this.data = data.results;
+        this.data.map(async (el) => {
+          let urlFlag = `https://countryflagsapi.com/png/${el.location.country}`;
+          el.location.flag = urlFlag;
+        });
 
         console.log(
           this.data.map((el) => {
@@ -121,6 +126,13 @@ var app = new Vue({
         );
       } catch (err) {
         console.log(`Error ${err.status}: ${err.statusText}`);
+      }
+    },
+
+    deleteUsers(index) {
+      let isDelete = confirm("Esta Seguro Que Desea Eliminar Al Usuario?");
+      if (isDelete) {
+        this.dataFilter.splice(index, 1);
       }
     },
   },

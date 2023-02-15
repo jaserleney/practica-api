@@ -52,13 +52,13 @@ body {
 }
 
 .fade-in-down {
-  animation: fade-in-down 1.3s ease-in-out 1;
+  animation: fade-in-down 1.3s ease 1;
 }
 
 @keyframes fade-in-down {
   from {
     opacity: 0;
-    transform: translateY(-200px);
+    transform: translateY(-50%);
   }
   to {
     opacity: 1;
